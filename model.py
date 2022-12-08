@@ -1,6 +1,5 @@
 import os
 
-
 img_train_path = r'Train'
 img_data_array = []
 class_name = []
