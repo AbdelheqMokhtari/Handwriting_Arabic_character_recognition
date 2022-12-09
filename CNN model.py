@@ -1,7 +1,13 @@
 import os
 import cv2 as cv
 import numpy as np
+import tensorflow as tf
 from keras.utils import to_categorical
+from tensorflow import keras
+from keras.layers.convolutional import Conv2D
+from keras.layers import Dense
+from keras.layers.convolutional import MaxPooling2D
+from keras.layers import Flatten
 
 # Loading Train Data
 print("Train Data Loading ...")
@@ -67,3 +73,25 @@ print("training data shape after Expanding the dimension:", np.shape(train_data)
 test_data = np.reshape(test_data, [-1, 32, 32, 1])
 print("test data shape after Expanding the dimension:", np.shape(test_data))
 
+# Creating model
+print("\nCreating a model ...")
+
+model = keras.Sequential([
+    Conv2D(32, 3, padding="same", activation="relu", input_shape=(32, 32, 1)),
+    MaxPooling2D(2, 2),
+    Conv2D(64, 3, padding="same", activation="relu"),
+    MaxPooling2D(2, 2),
+    Conv2D(128, 3, padding="same", activation="relu"),
+    MaxPooling2D(2, 2),
+    Conv2D(64, 3, padding="same", activation="relu"),
+    MaxPooling2D(2, 2),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dense(256, activation="relu"),
+    Dense(28, activation="softmax")
+])
+
+print(model.summary())
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+history = model.fit(train_data, train_label, epochs=10, validation_data=(test_data, test_label))
