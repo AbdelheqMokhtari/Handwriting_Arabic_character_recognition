@@ -94,4 +94,7 @@ model = keras.Sequential([
 print(model.summary())
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-history = model.fit(train_data, train_label, epochs=10, validation_data=(test_data, test_label))
+history = model.fit(train_data, train_label, epochs=30, validation_data=(test_data, test_label))
+# save the weights
+print("\nSaving the model...")
+model.save('Models/first_model.h5')
