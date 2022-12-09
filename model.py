@@ -107,8 +107,8 @@ epochs = 50
 batch_size = 68
 
 # Fit the model
-history = model.fit_generator(train_data, train_label, batch_size=batch_size,
-                              epochs=epochs, validation_data=(test_data, test_label),
-                              steps_per_epoch=test_data.shape[0] // batch_size,
-                              verbose=2, )
+# history = model.fit_generator(train_data, train_label, batch_size=batch_size,
+#                              epochs=epochs, validation_data=(test_data, test_label),
+#                              steps_per_epoch=test_data.shape[0] // batch_size,
+#                              verbose=2, )
 
